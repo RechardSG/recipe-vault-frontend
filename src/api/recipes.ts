@@ -44,24 +44,32 @@ export const deleteRecipe = (id: number): Promise<void> => {
 import axios from 'axios';
 import type { RecipeCreateDTO, RecipeResponseDTO } from '@/types/Recipe';
 
-const API_BASE_URL = 'http://localhost:8080';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+const apiClient = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 
 export const getRecipes = (params = {}) => {
-  return axios.get(`${API_BASE_URL}/recipes/paged`, { params });
+  return apiClient.get('/recipes/paged', { params });
 };
 
 export const getRecipeById = (id: number) => {
-  return axios.get(`${API_BASE_URL}/recipes/${id}`);
+  return apiClient.get(`/recipes/${id}`);
 };
 
 export const createRecipe = (recipeData: RecipeCreateDTO) => {
-  return axios.post(`${API_BASE_URL}/recipes`, recipeData);
+  return apiClient.post('/recipes', recipeData);
 };
 
 export const updateRecipe = (id: number, recipeData: RecipeCreateDTO) => {
-  return axios.put(`${API_BASE_URL}/recipes/${id}`, recipeData);
+  return apiClient.put(`/recipes/${id}`, recipeData);
 };
 
 export const deleteRecipe = (id: number) => {
-  return axios.delete(`${API_BASE_URL}/recipes/${id}`);
+  return apiClient.delete(`/recipes/${id}`);
 };
+
