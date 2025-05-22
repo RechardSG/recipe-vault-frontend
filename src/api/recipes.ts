@@ -46,30 +46,22 @@ import type { RecipeCreateDTO, RecipeResponseDTO } from '@/types/Recipe';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-const apiClient = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
 export const getRecipes = (params = {}) => {
-  return apiClient.get('/recipes/paged', { params });
+  return axios.get(`${API_BASE_URL}/recipes/paged`, { params });
 };
 
 export const getRecipeById = (id: number) => {
-  return apiClient.get(`/recipes/${id}`);
+  return axios.get(`${API_BASE_URL}/recipes/${id}`);
 };
 
 export const createRecipe = (recipeData: RecipeCreateDTO) => {
-  return apiClient.post('/recipes', recipeData);
+  return axios.post(`${API_BASE_URL}/recipes`, recipeData);
 };
 
 export const updateRecipe = (id: number, recipeData: RecipeCreateDTO) => {
-  return apiClient.put(`/recipes/${id}`, recipeData);
+  return axios.put(`${API_BASE_URL}/recipes/${id}`, recipeData);
 };
 
 export const deleteRecipe = (id: number) => {
-  return apiClient.delete(`/recipes/${id}`);
+  return axios.delete(`${API_BASE_URL}/recipes/${id}`);
 };
-
