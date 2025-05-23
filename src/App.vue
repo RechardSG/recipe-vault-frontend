@@ -49,6 +49,34 @@ recipe-vault-frontend/
         © 2025 Recipe Vault
       </el-footer>
     </el-container>
+
+    <el-container style="flex: 1; flex-direction: row;">
+      <!-- Sidebar (hidden on small screens) -->
+      <el-aside class="sidebar">
+        <el-menu
+          :default-active="$route.path"
+          router
+          class="el-menu-vertical-demo"
+          background-color="#2d3a4b"
+          text-color="#fff"
+          active-text-color="#409EFF"
+        >
+          <el-menu-item index="/">
+            <el-icon><List /></el-icon>
+            <span>Recipe List</span>
+          </el-menu-item>
+          <el-menu-item index="/add">
+            <el-icon><Plus /></el-icon>
+            <span>Add Recipe</span>
+          </el-menu-item>
+        </el-menu>
+      </el-aside>
+
+      <!-- Main Content -->
+      <el-main class="main">
+        <router-view />
+      </el-main>
+    </el-container>
   </el-container>
 </template>
 
@@ -102,6 +130,42 @@ body {
 
 .el-form-item__label {
   color: #90caf9;
+}
+
+.sidebar {
+  background-color: #2d3a4b;
+  color: white;
+}
+
+.header {
+  background: linear-gradient(to right, #c9dc5c, #a3c73d, #5ea443);
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.main {
+  padding: 16px;
+  background-color: #f5f7fa;
+}
+
+.footer {
+  text-align: center;
+  color: #999;
+  padding: 8px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+  .header h2 {
+    font-size: 1.2rem;
+  }
+  .main {
+    padding: 8px;
+  }
 }
 
 </style>

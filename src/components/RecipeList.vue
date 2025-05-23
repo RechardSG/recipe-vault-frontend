@@ -32,48 +32,50 @@ Let user delete (DELETE /recipes/:id)
         <el-button @click="resetFilters">Reset</el-button>
       </el-form-item>
     </el-form>
-    <el-table :data="recipes" style="width: 100%" stripe>
-      <el-table-column prop="title" label="Title" />
-      <el-table-column prop="difficulty" label="Difficulty" />
-      <el-table-column prop="creatorName" label="Creator" />
-      <el-table-column label="Ingredient Count">
-        <template #default="scope">
-          {{ scope.row.ingredients?.length ?? 0 }}
-        </template>
-      </el-table-column>
-      <el-table-column prop="createdDate" label="Created">
-        <template #default="scope">
-          {{ formatDate(scope.row.createdDate) }}
-        </template>
-      </el-table-column>
-      <el-table-column label="Actions" width="240">
-        <template #default="scope">
-          <div style="display: flex; gap: 8px"></div>
-          <el-button
-            size="small"
-            @click="$router.push(`/recipes/${scope.row.id}`)"
-          >
-            View
-          </el-button>
-          <el-button
-            type="primary"
-            size="small"
-            @click="$router.push(`/edit/${scope.row.id}`)"
-          >
-            <el-icon><Edit /></el-icon>
-            Edit
-          </el-button>
-          <el-button
-            type="danger"
-            size="small"
-            @click="confirmDelete(scope.row.id)"
-          >
-            Delete
-          </el-button>
-        </template>
-      </el-table-column>
+    <div style="overflow-x: auto;">
+      <el-table :data="recipes" style="width: 100%" stripe>
+        <el-table-column prop="title" label="Title" />
+        <el-table-column prop="difficulty" label="Difficulty" />
+        <el-table-column prop="creatorName" label="Creator" />
+        <el-table-column label="Ingredient Count">
+          <template #default="scope">
+            {{ scope.row.ingredients?.length ?? 0 }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="createdDate" label="Created">
+          <template #default="scope">
+            {{ formatDate(scope.row.createdDate) }}
+          </template>
+        </el-table-column>
+        <el-table-column label="Actions" width="240">
+          <template #default="scope">
+            <div style="display: flex; gap: 8px"></div>
+            <el-button
+              size="small"
+              @click="$router.push(`/recipes/${scope.row.id}`)"
+            >
+              View
+            </el-button>
+            <el-button
+              type="primary"
+              size="small"
+              @click="$router.push(`/edit/${scope.row.id}`)"
+            >
+              <el-icon><Edit /></el-icon>
+              Edit
+            </el-button>
+            <el-button
+              type="danger"
+              size="small"
+              @click="confirmDelete(scope.row.id)"
+            >
+              Delete
+            </el-button>
+          </template>
+        </el-table-column>
 
-    </el-table>
+      </el-table>
+    </div>
 
     <el-pagination
       v-model:current-page="currentPage"
